@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int              @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  email           String           @unique
+  isAdmin         Boolean          @default(false)
+  recipes         Recipe[]
+  comments        Comment[]
+  ratings         Rating[]
+  favorites       FavoriteRecipes[]
+}
+
+model Recipe {
+  id          Int           @id @default(autoincrement())
+  title       String
+  description String
+  ingredients String
+  steps       String
+  difficulty  Int     //od 1 do 100? albo 3 poziomy? 1 | 2 | 3
+  timeToMake  Int
+  authorId    Int
+  author      User          @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  ratings     Rating[]
+  categories  RecipeCategory[]
+  favorites   FavoriteRecipes[]
+}
+
+model Comment {
+  id         Int       @id @default(autoincrement())
+  content    String
+  createdAt  DateTime  @default(now())
+  userId     Int
+  user       User      @relation(fields: [userId], references: [id])
+  recipeId   Int
+  recipe     Recipe    @relation(fields: [recipeId], references: [id])
+}
+
+model Rating {
+  id        Int      @id @default(autoincrement())
+  value     Int
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  recipeId  Int
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+}
+
+model Category {
+  id         Int              @id @default(autoincrement())
+  name       String
+  recipes    RecipeCategory[]
+}
+
+model RecipeCategory {
+  recipeId    Int
+  recipe      Recipe   @relation(fields: [recipeId], references: [id])
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  @@id([recipeId, categoryId])
+}
+
+model FavoriteRecipes {
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  recipeId    Int
+  recipe      Recipe   @relation(fields: [recipeId], references: [id])
+
+  @@id([userId, recipeId])
+}
