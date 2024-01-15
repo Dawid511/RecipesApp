@@ -34,7 +34,7 @@ model Recipe {
   author      User          @relation(fields: [authorId], references: [id])
   comments    Comment[]
   ratings     Rating[]
-  categories  RecipeCategory[]
+  categor     RecipeCategory[]    // categories zmiana do testow bazy
   favorites   FavoriteRecipes[]
 }
 
@@ -67,7 +67,7 @@ model RecipeCategory {
   recipeId    Int
   recipe      Recipe   @relation(fields: [recipeId], references: [id])
   categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id])
+  catego      Category @relation(fields: [categoryId], references: [id])
 
   @@id([recipeId, categoryId])
 }

@@ -1,8 +1,10 @@
 export class RecipeDto {
   id: number;
   title: string;
-  rating: number;
   description: string;
   ingredients: string[];
-  instructions: string[];
+  steps: string;
+  difficulty: number;
+  timeToMake: number;
+  authorId: number;
 }
