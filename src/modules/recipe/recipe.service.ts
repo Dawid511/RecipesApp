@@ -10,7 +10,13 @@ export class RecipeService {
 
   async showRecipe(filter: RecipeFilterDto) {
     return this.prisma.recipe.findMany({
-      where: {}, // do filtrow
+      where: {
+        categor: {
+          some: {
+            categoryId: filter.categoryId,
+          },
+        },
+      }, // do filtrow
       orderBy: {
         [filter.sortBy]: filter.sortOrder,
       },

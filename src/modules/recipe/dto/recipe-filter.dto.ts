@@ -1,4 +1,5 @@
-import { IsEnum, IsOptional } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class RecipeFilterDto {
   @IsOptional()
@@ -8,4 +9,9 @@ export class RecipeFilterDto {
   @IsOptional()
   @IsEnum(['asc', 'desc'])
   sortOrder?: 'asc' | 'desc' = 'desc';
+
+  @IsOptional()
+  @IsNumber()
+  @Type(() => Number)
+  categoryId?: number; //
 }

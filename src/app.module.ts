@@ -9,6 +9,8 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CategoriesService } from './modules/categories/categories.service';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { RatingModule } from './modules/rating/rating.module';
+import { CommentModule } from './modules/comment/comment.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { CategoriesModule } from './modules/categories/categories.module';
     UserModule,
     AuthModule,
     CategoriesModule,
+    RatingModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService, CategoriesService],
