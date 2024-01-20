@@ -16,11 +16,12 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: 'http://localhost:3000/*',
+    origin: 'http://localhost:3000',
     credentials: true, // autoryzacja, pozwala obslugiwac cookies
   });
   app.use(cookieParser());
 
   await app.listen(9000);
 }
+
 bootstrap();
