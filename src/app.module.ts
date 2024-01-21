@@ -11,6 +11,7 @@ import { CategoriesService } from './modules/categories/categories.service';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { RatingModule } from './modules/rating/rating.module';
 import { CommentModule } from './modules/comment/comment.module';
+import { FavoriteModule } from './modules/favorite/favorite.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CommentModule } from './modules/comment/comment.module';
     CategoriesModule,
     RatingModule,
     CommentModule,
+    FavoriteModule,
   ],
   controllers: [AppController],
   providers: [AppService, CategoriesService],

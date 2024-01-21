@@ -10,7 +10,7 @@ export class CategoriesService {
     return this.prisma.category.findMany();
   }
 
-  async createRecipe(data: CreateCategoryDto) {
+  async createCategory(data: CreateCategoryDto) {
     return this.prisma.category.create({
       data: {
         name: data.name,

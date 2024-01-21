@@ -13,6 +13,6 @@ export class CategoriesController {
 
   @Post()
   addCategory(@Body() data: CreateCategoryDto) {
-    return this.categoriesService.createRecipe(data);
+    return this.categoriesService.createCategory(data);
   }
 }
