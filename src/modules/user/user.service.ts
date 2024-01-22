@@ -31,4 +31,19 @@ export class UserService {
       },
     });
   }
+
+  getUser(id: number) {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        password: false,
+      },
+    });
+  }
 }

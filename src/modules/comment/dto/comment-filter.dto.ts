@@ -8,7 +8,7 @@ export class CommentFilterDto {
 
   @IsOptional()
   @IsEnum(['asc', 'desc'])
-  sortOrder?: 'asc' | 'desc' = 'asc';
+  sortOrder?: 'asc' | 'desc' = 'desc';
 
   // @IsOptional() // nie ma sensu pobierac wszystkie komentarze
   @IsNumber()
