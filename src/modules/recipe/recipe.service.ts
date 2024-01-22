@@ -62,6 +62,21 @@ export class RecipeService {
         recipeId: id,
       },
     });
+    await this.prisma.comment.deleteMany({
+      where: {
+        recipeId: id,
+      },
+    });
+    await this.prisma.rating.deleteMany({
+      where: {
+        recipeId: id,
+      },
+    });
+    await this.prisma.favoriteRecipes.deleteMany({
+      where: {
+        recipeId: id,
+      },
+    });
     return this.prisma.recipe.delete({
       where: {
         id,
@@ -117,32 +132,3 @@ export class RecipeService {
     });
   }
 }
-
-// async getRecipesByIds(recipeIds: number[]): Promise<RecipeDto[]> {
-//   return this.prisma.recipe.findMany({
-//     where: {
-//       id: {
-//         in: recipeIds, // Użyj operatora IN, aby wybrać wszystkie przepisy o podanych ID
-//       },
-//     },
-//     // Tutaj dodaj selekcję pól, które chcesz zwrócić
-//   });
-// }
-//
-// async findUserFavorites(id: number): Promise<RecipeDto[]> {
-//   // Pobierz wszystkie ID przepisów ulubionych przez użytkownika
-//   const favoriteRecipeIds = await this.prisma.favoriteRecipes.findMany({
-//     where: { userId: id },
-//     select: { recipeId: true }, // Zwróć tylko ID przepisów
-//   });
-//
-//   // Zamień tablicę obiektów na tablicę samych ID
-//   const recipeIds = favoriteRecipeIds.map((fav) => fav.recipeId);
-//
-//   // Użyj RecipeService do pobrania pełnych danych przepisów
-//   // Zakładając, że RecipeService ma metodę getRecipesByIds, która przyjmuje tablicę ID i zwraca Promise<RecipeDto[]>
-//   const recipes = await this.getRecipesByIds(recipeIds);
-//
-//   return recipes;
-// }
-// }
