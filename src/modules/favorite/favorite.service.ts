@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateFavDto } from './dto/fav-create.dto';
 import { FavFilterDto } from './dto/fav-filter.dto';
+import { DeleteFavDto } from './dto/fav-delete.dto';
 
 @Injectable()
 export class FavoriteService {
@@ -26,7 +27,7 @@ export class FavoriteService {
     });
   }
 
-  async showFavourites(filter: FavFilterDto) {
+  async showFav(filter: FavFilterDto) {
     const fav = await this.prisma.favoriteRecipes.findMany({
       where: {
         userId: filter.userId,
@@ -40,5 +41,27 @@ export class FavoriteService {
     }
 
     return fav.map((fav) => fav.recipeId);
+  }
+
+  async deleteFav(data: DeleteFavDto) {
+    return this.prisma.favoriteRecipes.delete({
+      where: {
+        userId_recipeId: {
+          userId: data.userId,
+          recipeId: data.recipeId,
+        },
+      },
+    });
+  }
+
+  getFav(data: DeleteFavDto) {
+    return this.prisma.favoriteRecipes.findUnique({
+      where: {
+        userId_recipeId: {
+          userId: data.userId,
+          recipeId: data.recipeId,
+        },
+      },
+    });
   }
 }
