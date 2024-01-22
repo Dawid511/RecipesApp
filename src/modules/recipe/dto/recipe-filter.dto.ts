@@ -14,4 +14,9 @@ export class RecipeFilterDto {
   @IsNumber()
   @Type(() => Number)
   categoryId?: number; //
+
+  @IsOptional()
+  @IsNumber()
+  @Type(() => Number)
+  userId?: number;
 }

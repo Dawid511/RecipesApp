@@ -26,6 +26,11 @@ export class RecipeController {
     return this.recipeService.showRecipe(filter);
   }
 
+  @Get('/user')
+  showRecipeForUser(@Query() filter: RecipeFilterDto) {
+    return this.recipeService.showRecipeForUser(filter);
+  }
+
   // @Get('/test') // kolejnosc ma znazenie zczytywanie od gory
   // test(@Query() filter: RecipeFilterDto) {
   //   return filter;

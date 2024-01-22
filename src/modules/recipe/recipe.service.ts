@@ -23,6 +23,17 @@ export class RecipeService {
     });
   }
 
+  async showRecipeForUser(filter: RecipeFilterDto) {
+    return this.prisma.recipe.findMany({
+      where: {
+        authorId: filter.userId,
+      }, // do filtrow
+      orderBy: {
+        [filter.sortBy]: filter.sortOrder,
+      },
+    });
+  }
+
   async createRecipe(data: CreateRecipeDto) {
     return this.prisma.recipe.create({
       data: {
