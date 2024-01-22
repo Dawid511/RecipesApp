@@ -21,6 +21,11 @@ import { RecipeFilterDto } from './dto/recipe-filter.dto';
 export class RecipeController {
   constructor(private recipeService: RecipeService) {}
 
+  @Get('/fav')
+  showRating(@Query('userId', new ParseIntPipe()) userId: number) {
+    return this.recipeService.findUserFavorites(userId);
+  }
+
   @Get()
   showRecipe(@Query() filter: RecipeFilterDto) {
     return this.recipeService.showRecipe(filter);
