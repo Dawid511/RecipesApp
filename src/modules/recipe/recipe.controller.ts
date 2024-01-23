@@ -21,6 +21,11 @@ import { RecipeFilterDto } from './dto/recipe-filter.dto';
 export class RecipeController {
   constructor(private recipeService: RecipeService) {}
 
+  @Get('/user')
+  showRecipeForUser(@Query() filter: RecipeFilterDto) {
+    return this.recipeService.showRecipeForUser(filter);
+  }
+
   @Get('/fav')
   showRating(@Query('userId', new ParseIntPipe()) userId: number) {
     return this.recipeService.findUserFavorites(userId);
@@ -29,11 +34,6 @@ export class RecipeController {
   @Get()
   showRecipe(@Query() filter: RecipeFilterDto) {
     return this.recipeService.showRecipe(filter);
-  }
-
-  @Get('/user')
-  showRecipeForUser(@Query() filter: RecipeFilterDto) {
-    return this.recipeService.showRecipeForUser(filter);
   }
 
   // @Get('/test') // kolejnosc ma znazenie zczytywanie od gory

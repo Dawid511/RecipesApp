@@ -18,5 +18,5 @@ export class RecipeFilterDto {
   @IsOptional()
   @IsNumber()
   @Type(() => Number)
-  userId?: number;
+  authorId?: number;
 }

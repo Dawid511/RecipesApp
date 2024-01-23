@@ -12,6 +12,7 @@ export class FavoriteService {
     const existingFav = await this.prisma.favoriteRecipes.findFirst({
       where: {
         userId: data.userId,
+        recipeId: data.recipeId,
       },
     });
 

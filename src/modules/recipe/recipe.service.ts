@@ -27,7 +27,7 @@ export class RecipeService {
   async showRecipeForUser(filter: RecipeFilterDto) {
     return this.prisma.recipe.findMany({
       where: {
-        authorId: filter.userId,
+        authorId: filter.authorId,
       }, // do filtrow
       orderBy: {
         [filter.sortBy]: filter.sortOrder,

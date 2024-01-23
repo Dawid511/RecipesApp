@@ -13,7 +13,7 @@ import { FavoriteService } from './favorite.service';
 import { FavFilterDto } from './dto/fav-filter.dto';
 import { CreateFavDto } from './dto/fav-create.dto';
 import { DeleteFavDto } from './dto/fav-delete.dto';
-import { RatingNotfoundException } from '../../exceptions/rating-notfound-exception';
+import { FavNotfoundException } from '../../exceptions/fav-notfound-exception';
 
 @Controller('fav')
 export class FavoriteController {
@@ -34,8 +34,8 @@ export class FavoriteController {
   async deleteFav(
     @Body(new ValidationPipe({ transform: true })) id: DeleteFavDto,
   ) {
-    const rating = await this.favouriteService.getFav(id);
-    if (!rating) throw new RatingNotfoundException();
+    const fav = await this.favouriteService.getFav(id);
+    if (!fav) throw new FavNotfoundException();
 
     await this.favouriteService.deleteFav(id);
   }
