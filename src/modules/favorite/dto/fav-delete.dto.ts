@@ -1,9 +1,12 @@
-import { IsInt } from 'class-validator';
+import { IsNumber } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class DeleteFavDto {
-  @IsInt()
+  @IsNumber()
+  @Type(() => Number)
   userId: number;
 
-  @IsInt()
+  @IsNumber()
+  @Type(() => Number)
   recipeId: number;
 }

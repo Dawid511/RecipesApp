@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Post,
   Query,
+  ValidationPipe,
 } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { FavFilterDto } from './dto/fav-filter.dto';
@@ -19,18 +20,20 @@ export class FavoriteController {
   constructor(private favouriteService: FavoriteService) {}
 
   @Get()
-  showRating(@Query() filter: FavFilterDto) {
+  showFav(@Query() filter: FavFilterDto) {
     return this.favouriteService.showFav(filter);
   }
 
   @Post()
-  addRating(@Body() data: CreateFavDto) {
+  addFav(@Body() data: CreateFavDto) {
     return this.favouriteService.createFav(data);
   }
 
-  @Delete(':id')
+  @Delete()
   @HttpCode(HttpStatus.NO_CONTENT)
-  async deleteComment(@Query() id: DeleteFavDto) {
+  async deleteFav(
+    @Body(new ValidationPipe({ transform: true })) id: DeleteFavDto,
+  ) {
     const rating = await this.favouriteService.getFav(id);
     if (!rating) throw new RatingNotfoundException();
 
