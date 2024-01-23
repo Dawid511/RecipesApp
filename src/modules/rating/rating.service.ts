@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateRateDto } from './dto/create-rate.dto';
 import { RateFilterDto } from './dto/rate-filter.dto';
+import { EditRateDto } from './dto/rate-edit.dto';
 
 @Injectable()
 export class RatingService {
@@ -37,6 +38,27 @@ export class RatingService {
         value: data.rate,
         userId: data.userId,
         recipeId: data.recipeId,
+      },
+    });
+  }
+
+  editRate(id: number, data: EditRateDto) {
+    return this.prisma.rating.update({
+      where: {
+        id,
+      },
+      data: {
+        value: data.rate,
+        recipeId: data.recipeId,
+        userId: data.userId,
+      },
+    });
+  }
+
+  getRate(id: number) {
+    return this.prisma.rating.findUnique({
+      where: {
+        id,
       },
     });
   }
