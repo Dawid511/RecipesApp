@@ -18,7 +18,9 @@ export class RatingService {
       return 0;
     }
 
-    return ratings.reduce((acc, curr) => acc + curr.value, 0) / ratings.length;
+    return Math.floor(
+      ratings.reduce((acc, curr) => acc + curr.value, 0) / ratings.length,
+    );
   }
 
   async createRate(data: CreateRateDto) {
