@@ -25,6 +25,7 @@ export class FavoriteController {
   }
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   addFav(@Body() data: CreateFavDto) {
     return this.favouriteService.createFav(data);
   }
